@@ -22,4 +22,4 @@ RUN pip install -r requirements.txt
 
 EXPOSE 9900
 
-ENTRYPOINT ["sleep 120 && python app.py"]
+CMD ["sh", "-c", "sleep 120 && python app.py"]
