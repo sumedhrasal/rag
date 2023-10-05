@@ -51,3 +51,4 @@ if __name__ == '__main__':
     # db = persist.Persist(class_name=class_name)
     db = vectorstore.Store(class_name=class_name)
     app.run(host='0.0.0.0', port='9900', debug=True)
+    print('app is now runnning')

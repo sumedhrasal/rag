@@ -1,0 +1,8 @@
+streamlit
+langchain
+python-dotenv
+Flask
+openai
+langchain
+weaviate-client
+chromadb

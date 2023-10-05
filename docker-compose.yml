@@ -1,0 +1,72 @@
+---
+version: '3.4'
+services:
+  weaviate:
+    command:
+    - --host
+    - 0.0.0.0
+    - --port
+    - '8080'
+    - --scheme
+    - http
+    image: semitechnologies/weaviate:1.21.0
+    ports:
+    - 8080:8080
+    volumes:
+    - ./weaviate_data:/var/lib/weaviate
+    restart: on-failure:0
+    environment:
+      QUERY_DEFAULTS_LIMIT: 25
+      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'true'
+      PERSISTENCE_DATA_PATH: '/var/lib/weaviate'
+      CONTEXTIONARY_URL: contextionary:9999
+      QNA_INFERENCE_API: 'http://qna-transformers:8080'
+      NER_INFERENCE_API: 'http://ner-transformers:8080'
+      SUM_INFERENCE_API: 'http://sum-transformers:8080'
+      SPELLCHECK_INFERENCE_API: 'http://text-spellcheck:8080'
+      DEFAULT_VECTORIZER_MODULE: 'text2vec-contextionary'
+      ENABLE_MODULES: 'text2vec-contextionary,qna-transformers'
+      # ,ner-transformers,sum-transformers,text-spellcheck
+      CLUSTER_HOSTNAME: 'node1'
+  contextionary:
+    environment:
+      OCCURRENCE_WEIGHT_LINEAR_FACTOR: 0.75
+      EXTENSIONS_STORAGE_MODE: weaviate
+      EXTENSIONS_STORAGE_ORIGIN: http://weaviate:8080
+      NEIGHBOR_OCCURRENCE_IGNORE_PERCENTILE: 5
+      ENABLE_COMPOUND_SPLITTING: 'false'
+    image: semitechnologies/contextionary:en0.16.0-v1.2.1
+    ports:
+    - 9999:9999
+  qna-transformers:
+    image: semitechnologies/qna-transformers:bert-large-uncased-whole-word-masking-finetuned-squad-1.0.0
+    environment:
+      ENABLE_CUDA: '0'
+  # ner-transformers:
+  #   image: semitechnologies/ner-transformers:dslim-bert-base-NER
+  #   environment:
+  #     ENABLE_CUDA: '0'
+  # sum-transformers:
+  #   image: semitechnologies/sum-transformers:facebook-bart-large-cnn-1.0.0
+  #   environment:
+  #     ENABLE_CUDA: '0'
+  # text-spellcheck:
+  #   image: semitechnologies/text-spellcheck-model:pyspellchecker-en
+  rag:
+    build:
+      # context: .
+      dockerfile: Dockerfile
+    container_name: rag-app
+    # working_dir: /app
+    # volumes:
+    #   - ./app:/app
+    ports:
+      - "9900:9900"
+    depends_on:
+      - weaviate
+      - contextionary
+      # - text-spellcheck
+      # - sum-transformers
+      - qna-transformers
+    # command: python /app/app.py
+...
