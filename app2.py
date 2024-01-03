@@ -12,8 +12,8 @@ from rag import data
 app = Flask(__name__)
 
 
-@app.route('/company', methods=['POST'])
-def test():
+@app.route('/company/batch', methods=['POST'])
+def batch_mode():
     # fetch company name
     # check if company exists by searching in the DB 
     #       - if found, load pages
@@ -120,6 +120,16 @@ def test():
             sleep(30)
     store.delete_collection()
     return jsonify({"response":response})
+
+
+@app.route('/company/live', methods=['POST'])
+def live_mode():
+    request_data = request.get_json()
+    company_name = str(request_data['company']).lower()
+
+    # call crunchbase API here
+
+    return jsonify({"response":"ok"})
 
 
 if __name__ == '__main__':
