@@ -28,4 +28,4 @@ COPY . .
 
 EXPOSE 8080
 
-CMD [ "gunicorn", "-b", "0.0.0.0:8080", "app2:app" ]
+CMD [ "gunicorn", "-b", "0.0.0.0:8080", "app2:app", "--timeout", "300" ]

@@ -126,10 +126,9 @@ def batch_mode():
 def live_mode():
     request_data = request.get_json()
     company_name = str(request_data['company']).lower()
-
-    # call crunchbase API here
-
-    return jsonify({"response":"ok"})
+    response = data.get_structured_data_by_company(company_name)
+    unstructured_data = data.get_unstructured_data_by_company(company_name)
+    return jsonify({"response":response})
 
 
 if __name__ == '__main__':
