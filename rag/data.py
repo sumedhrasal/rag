@@ -15,15 +15,18 @@ def load_documents_by_name(name):
 
 def get_structured_data_by_company(company_name):
     # data to be filled using CrunchBase
-    response = {"Company": company_name, 
-                "Industry": "",
-                "Leadership": {
-                    "CEO": "",
-                    "CTO": "",
-                    "CFO": "",
-                    "C0O": ""
-                },
-                "Competitors": []}
+    response = {
+        "Company": company_name, 
+        "Industry": "", # define the industry to which the company belongs to
+        "Description": "", # provide a short description of the company
+        "Leadership": { # provide names
+            "CEO": "",
+            "CTO": "",
+            "CFO": "",
+            "C0O": ""
+        },
+        "Competitors": [] # provide list of competitor company names
+    }
     return response
 
 
