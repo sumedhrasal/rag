@@ -1,7 +1,9 @@
-streamlit
-langchain
-python-dotenv
-Flask
-openai
-langchain
-weaviate-client
+streamlit==1.29.0
+langchain==0.0.267
+python-dotenv==1.0.0
+Flask==2.3.2
+openai==0.27.8
+# weaviate-client==3.24.1
+gunicorn==21.2.0
+chromadb==0.4.6
+tiktoken==0.4.0
