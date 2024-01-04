@@ -1,11 +1,13 @@
 from time import sleep
 # from langchain.chains import RetrievalQA, RetrievalQAWithSourcesChain
 from langchain.chains.qa_with_sources import load_qa_with_sources_chain
+from langchain.chains.question_answering import load_qa_chain
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.vectorstores import Chroma
 from langchain.docstore.document import Document
 from rag import llm_config, data, prompt, rag_objects
+import json
 
 
 def conflate(company_name, structured_data: rag_objects.StructuredResponse, unstructured_data):
@@ -35,13 +37,14 @@ def get_response_from_unstructured_data(company_name, unstructured_data):
 
 def get_result_by_prompt(store, prompt):
     relevant_docs = store.similarity_search(prompt, k=5)
-    chain = load_qa_with_sources_chain(
+    chain = load_qa_chain(
         llm=llm_config.get_model(model_name="text-davinci-002"), 
     )
     result = chain(
         {"input_documents": relevant_docs, "question": prompt}, return_only_outputs=True
     )
-    return result
+    response = result['output_text'].replace("\n","").replace("  ", "")
+    return json.loads(response)
 
 
 def test(company_name):
