@@ -17,9 +17,9 @@ def get_embeddings(model='text-embedding-ada-002'):
 
 
 def get_model(model_name='text-ada-001'):
-    return OpenAI(model_name=model_name, openai_api_key=openai_api_key, temperature=0.2)
+    return OpenAI(model_name=model_name, openai_api_key=openai_api_key, temperature=0.1)
 
 
 def get_chat_model():
-    return ChatOpenAI(openai_api_key=openai_api_key, temperature=0.2)
+    return ChatOpenAI(openai_api_key=openai_api_key, temperature=0.5)
 
