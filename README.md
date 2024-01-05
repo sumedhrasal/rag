@@ -47,7 +47,7 @@ curl --location 'http://0.0.0.0:8080/company/batch' \
     "response": {
         "Company": "Glydways is a company that develops on-demand Personal Rapid Transit (PRT) systems. The company was founded in 2016 and is headquartered in South San Francisco, CA. Glydways' PRT system consists of on-demand, personal, autonomous, electric vehicles that travel on small, dedicated rights of way.2. Glydways is currently expanding its operations and business reach. The company has been selected by Contra Costa Transportation Authority and Tri Delta Transit for the initial vital segment of the Dynamic Personal Micro Transit project to increase public transit accessibility for the fast-growing communities of Pittsburg, Antioch, Oakley and Brentwood.",
         "Competitors": "Competitors or alternatives to Glydways include traditional mass transit systems such as rail or bus lanes.",
-        "Finanicals": "Glydways is generating revenue and has raised a total of $70 million in funding.",
+        "Financials": "Glydways is generating revenue and has raised a total of $70 million in funding.",
         "Industry": "The industry category that best suits Glydways is the transportation industry.",
         "Leadership": "The individuals in Glydways' leadership team include Gokul Hemmady (CEO), Mark Seeger (Founder), and Blake Barber (CTO).",
         "PEST Analysis": {

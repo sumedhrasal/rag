@@ -14,6 +14,11 @@ def load_documents_by_name(name):
     return all_docs
 
 
+def does_company_data_exists(name):
+    directory = os.path.dirname(__file__)
+    return os.path.exists(os.path.join(directory, 'raw_data', name))
+
+
 def get_structured_data_by_company(company_name) -> rag_objects.StructuredResponse:
     # data to be filled using CrunchBase
     return None
