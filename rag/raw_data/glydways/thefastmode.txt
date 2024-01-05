@@ -1,0 +1,14 @@
+
+
+Tecore Networks, a U.S. based innovator of wireless network infrastructure, has partnered with Glydways to provide today’s leading communication framework to operate the next generation of transportation technology. 
+
+Tecore Networks has deployed a comprehensive CBRS network solution that includes its carrier-grade Core and OnGo certified radios at Glydways Demonstration Facility in California. This secure, reliable, low-latency wireless network is key to enabling the full benefits of an automated mesh network transit systems.
+
+Telco Standardization Telco Standardization
+
+This secure network layer will allow a fully autonomous Glydcar fleet to seamlessly coordinate activities that move high volumes of people very efficiently and at a low cost across the Glydways mesh-style infrastructure network. This results in trips that move quickly, with zero intermediate stops, across a system to deliver a transit experience that is unmatched by existing transit modes. To facilitate a pioneer like Glydways in its goal to redefine the concept of transportation equality through its novel, green, private transportation methodology, it takes an equally dedicated and industry-leading vendor like Tecore Networks to provide the cutting-edge communication infrastructure necessary to deploy this low-latency private CBRS network.
+
+What differentiates Tecore from other similar vendors is its ability to provide single x86 based carrier-grade hardware that supports All-Gs technology simultaneously on the same hardware. With the flexibility of on-prem, cloud, and hybrid installations, enterprises can now procure technology solutions and services from a single vendor, while future-proofing their network. Tecore's carrier-grade core network, the iCore supports Data, SMS, Voice, and has an IP Multimedia Subsystem (IMS) that provides VoLTE services, all of which are designed to run on a virtualized platform. This path offers unparalleled benefits including reduced total cost of ownership, software upgrade flexibility, sustained growth, and access to the latest 3GPP roadmap.
+
+Jay Salkini, Founder and CEO of Tecore Networks
+At Tecore, we take pride in the success of our customers and the partnerships we build as a result. Combining Glydways ingenuity and Tecore’s infrastructure, the end customer gets to benefit from two leaders in their respective industries that are partnering to provide a trailblazing solution that aims to revolutionize the transportation industry.
