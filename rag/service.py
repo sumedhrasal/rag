@@ -32,9 +32,10 @@ def get_response_from_unstructured_data(company_name, unstructured_data):
         documents, embeddings#, collection_name=company_name
     )
     company_json = get_result_by_prompt(store, prompt.get_company_prompt(company_name), 5)
-    financial_json = get_result_by_prompt(store, prompt.get_company_financial_prompt(company_name, company_json.get('Industry','')), 2)
-    # print(company_json)
-    print(financial_json)
+    financial_json = get_result_by_prompt(store, prompt.get_company_financial_prompt(company_name), 3)
+    pest_json = get_result_by_prompt(store, prompt.get_industry_pest_prompt(company_json.get('Industry','')), 3)
+    # print(financial_json)
+    # print(pest_json)
 
     response = {
         "Company": {
@@ -51,13 +52,13 @@ def get_response_from_unstructured_data(company_name, unstructured_data):
         },
         "Competitors": company_json.get('Competitors',[]),
         "Financials": financial_json.get('Financials',''),
-        "PEST": {
-            "Political": financial_json.get('Political',''),
-            "Economical": financial_json.get('Economical',''),
-            "Social": financial_json.get('Social',''),
-            "Technological": financial_json.get('Technological','')
-        },
         "Value Proposition": financial_json.get('Value Proposition',''),
+        "PEST": {
+            "Political": pest_json.get('Political',''),
+            "Economical": pest_json.get('Economical',''),
+            "Social": pest_json.get('Social',''),
+            "Technological": pest_json.get('Technological','')
+        },
     }
     return response
 
@@ -65,7 +66,8 @@ def get_response_from_unstructured_data(company_name, unstructured_data):
 def get_result_by_prompt(store, prompt, k):
     relevant_docs = store.similarity_search(prompt, k)
     chain = load_qa_chain(
-        llm=llm_config.get_model(model_name="text-davinci-002"), 
+        # llm=llm_config.get_model(model_name="text-davinci-002"), 
+        llm=llm_config.get_chat_model(),
     )
     result = chain(
         {"input_documents": relevant_docs, "question": prompt}, return_only_outputs=True
