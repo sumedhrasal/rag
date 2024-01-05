@@ -1,0 +1,21 @@
+Bill Gates believes autonomous vehicles (AVs) will reach a tipping point of adoption, saying, "When it happens, AVs will change transportation as dramatically as the PC [personal computer] changed office work." Gates is backing up his sentiments with money, by investing in Glydways, a San Francisco-based robotaxi startup.
+
+The investment through his venture investment fund Gates Frontier was part of a Series B funding round that raised a total of $56 million for Glydways. Other notable investors in the round included New Science Ventures, Khosla Ventures and Spanish construction company ACS Group.
+
+Glydways has raised $70 million since it was founded in 2016.
+
+Reducing Congestion And Improving Passenger Safety
+
+Gldyways' mission is to offer an enjoyable riding experience at optimal capacity at a low cost with the smallest carbon footprint. Glydways' technology combines light detection and ranging (lidar), radar and cameras to perceive its surroundings and make safe driving decisions. It operates these technologies in its Glydcars, which are four-passenger electric vehicles (EVs) designed for urban mobility. The vehicles don't stop en route because of the company's continuous flow routing technology. The cars will operate in dedicated lanes and offer space for luggage, bicycles or wheelchairs. They are compliant with the Americans with Disabilities Act (ADA), providing an accessible solution for millions of people.
+
+The company's vehicles can potentially reduce traffic by working more efficiently than traditional cars. They can communicate with other Glydways vehicles to coordinate movements synchronously to avoid or reduce traffic jams. The vehicles are also safer than human drivers because their programming requires them to follow traffic laws and avoid accidents. And robotaxis don't knock back a few drinks after work or take illicit drugs and then get behind the wheel.
+
+Robotaxis like Glydways can also improve accessibility for people with disabilities who cannot drive yet still want to experience a safe and cost-effective way to travel around their city.
+
+Glydways presents municipalities with an intriguing opportunity for an attractive alternative to their mass-transit systems. It offers lower costs, customization, a reduced infrastructure footprint, on-demand scheduling and a modular mesh network that can provide full-city coverage.
+
+Glydways wants to develop personal rapid transit (PRT) systems, a novel approach that uses smaller autonomous vehicles to move people on demand. It's a more efficient and convenient way to move people in urban environments that maximizes people's time and reflects travelers' on-demand expectations. When fully implemented in a city, Glydways' network could reduce the need for car ownership and provide cities with an attractive alternative to traditional mass transit via trains or buses.
+
+Gates's investment in Glydways is a sign of his growing interest in the robotaxi market and more sustainable climate-benefiting solutions. The billionaire philanthropist previously invested in self-driving car companies Cruise and Aurora Innovation Inc.
+
+Another startup attracting attention for its tech-forward approach to solving problems is AvaWatz, a startup developing collaboration tools that get robots and drones and analytics to work together to complete data-intensive tasks.
