@@ -37,7 +37,7 @@ def query():
 
 @app.route('/result/<int:request_id>')
 def result(request_id):
-    return jsonify({"id":request_id})
+    return jsonify({"results":[request_id]})
 
 
 def get_response(request_data):
