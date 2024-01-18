@@ -6,8 +6,13 @@ from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.vectorstores import Chroma
 from langchain.docstore.document import Document
-from rag import llm_config, data, prompt, rag_objects
+from rag import llm_config, data, prompt, rag_objects, logger
 import json
+import logging
+
+
+logger.setup_logger()
+log = logging.getLogger(__name__)
 
 
 def conflate(company_name, structured_data: rag_objects.StructuredResponse, unstructured_data):
@@ -76,7 +81,6 @@ def get_result_by_prompt(store, prompt, k):
     try:
         return json.loads(response)
     except json.decoder.JSONDecodeError as e:
-        print(response, e)
         return {}
 
 
