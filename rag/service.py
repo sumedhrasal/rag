@@ -1,14 +1,20 @@
-from time import sleep
 # from langchain.chains import RetrievalQA, RetrievalQAWithSourcesChain
-from langchain.chains.qa_with_sources import load_qa_with_sources_chain
+# from langchain.chains.qa_with_sources import load_qa_with_sources_chain
 from langchain.chains.question_answering import load_qa_chain
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.vectorstores import Chroma
 from langchain.docstore.document import Document
 from rag import llm_config, data, prompt, rag_objects, logger
+from urllib.parse import urlencode, quote_plus
+from langchain.chains import LLMChain
+from langchain.prompts.chat import (
+    ChatPromptTemplate,
+    SystemMessagePromptTemplate,
+)
 import json
 import logging
+import requests
 
 
 logger.setup_logger()
@@ -82,6 +88,55 @@ def get_result_by_prompt(store, prompt, k):
         return json.loads(response)
     except json.decoder.JSONDecodeError as e:
         return {}
+
+
+def fetch_vc_information(company_name, company_url, id):
+    _company_url = company_url[company_url.index('//')+2:]
+    vc_url = f'https://parsers.vc/startup/{_company_url}'
+    print(vc_url)
+    params = {'url': vc_url, 'noinlinerefs': 'on', 'nonums': 'on'}
+    encoded_data = urlencode(params, quote_via=quote_plus)
+    final_url = f'https://www.w3.org/services/html2txt?{encoded_data}'
+    response = requests.get(final_url)
+    company_context = response.text
+    print(len(company_context))
+
+    template = """Context:
+    ```
+    {context}
+    ```
+    Using the above context answer the following points.
+    - Company Address
+    - Year Founded
+    - Category/Industry
+    - Tags
+    - Short Description
+    - Full Description
+    - Latest Round Data
+    - Total Funding
+    - Competitors
+    and respond back as a JSON object. If you don't have an answer in the provided context leave that field empty.
+    """
+    vc_prompt = SystemMessagePromptTemplate.from_template(
+        template, input_variables = ["context"])
+
+    chat_prompt = ChatPromptTemplate.from_messages(
+        [vc_prompt]
+    )
+    chain = LLMChain(llm=llm_config.get_chat_model(), prompt=chat_prompt)
+
+    result = chain.run(context=company_context)
+    try:
+        result_json = json.loads(result)
+        result_json['name'] = company_name
+        result_json['url'] = company_url
+        result_json['request_id'] = id
+        return result_json
+    except json.decoder.JSONDecodeError as e:
+        return {'name': company_name, 'url': company_url, 'year': '', "industry": "", 
+            "tags": "", "short description": "", "long description": "", "latest round": "", 
+            "total funding": "", "competitors": [],
+            "request_id": id}
 
 
 # def test(company_name):

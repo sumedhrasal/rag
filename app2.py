@@ -29,10 +29,9 @@ def query():
     # Get the JSON data from the request
     request_data = request.get_json()
     company_name = str(request_data['company']).lower().replace(" ", "")
-    company_url = str(request_data['url']).lower().replace(" ", "")
-    # Generate a unique ID
-    request_id = util.generate_id()
-    return jsonify({"id":request_id})
+    company_url = request_data['url']
+    response = service.fetch_vc_information(company_name, company_url, util.generate_id())
+    return jsonify(response)
 
 
 @app.route('/result/<int:request_id>')
