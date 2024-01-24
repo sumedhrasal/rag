@@ -125,7 +125,7 @@ def fetch_vc_information(company_name, company_url, id):
     )
     chain = LLMChain(llm=llm_config.get_chat_model(), prompt=chat_prompt)
 
-    result = chain.run(context=company_context)
+    result = chain.run(context=company_context if len(company_context) < 10000 else company_context[:10000])
     try:
         result_json = json.loads(result)
         result_json['name'] = company_name

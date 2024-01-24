@@ -28,7 +28,7 @@ def live_mode():
 def query():
     # Get the JSON data from the request
     request_data = request.get_json()
-    company_name = str(request_data['company']).lower().replace(" ", "")
+    company_name = request_data['company']
     company_url = request_data['url']
     response = service.fetch_vc_information(company_name, company_url, util.generate_id())
     return jsonify(response)
