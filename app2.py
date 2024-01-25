@@ -1,10 +1,12 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS 
 from rag import data, service, logger, util
-import json
 import concurrent.futures
+import tempfile
 
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 logger.setup_logger()
 executor = concurrent.futures.ProcessPoolExecutor(max_workers=1)
 
@@ -37,6 +39,38 @@ def query():
 @app.route('/result/<int:request_id>')
 def result(request_id):
     return jsonify({"results":[request_id]})
+
+
+@app.route('/upload', methods=['POST'])
+def upload_pdf():
+    try:
+        # Check if the POST request contains a file
+        if 'file' not in request.files:
+            return jsonify({'error': 'No file part'})
+
+        file = request.files['file']
+
+        # Check if the file is empty
+        if file.filename == '':
+            return jsonify({'error': 'No selected file'})
+
+        # Check if the file is a PDF
+        if not file.filename.endswith('.pdf'):
+            return jsonify({'error': 'Invalid file type. Please upload a PDF file'})
+
+        # Create a temporary file to store the PDF content
+        with tempfile.NamedTemporaryFile(suffix='.pdf', delete=False) as temp_pdf:
+            temp_pdf.write(file.read())
+            temp_pdf_path = temp_pdf.name
+
+        name_url_dict = service.extract_http_links_from_pdf(temp_pdf_path)
+
+        # Remove the temporary file
+        temp_pdf.close()
+
+        return jsonify(name_url_dict)
+    except Exception as e:
+        return jsonify({'error': f'An error occurred: {str(e)}'})
 
 
 def get_response(request_data):

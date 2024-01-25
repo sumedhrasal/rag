@@ -15,6 +15,7 @@ from langchain.prompts.chat import (
 import json
 import logging
 import requests
+import fitz
 
 
 logger.setup_logger()
@@ -137,6 +138,52 @@ def fetch_vc_information(company_name, company_url, id):
             "tags": "", "short description": "", "long description": "", "latest round": "", 
             "total funding": "", "competitors": [],
             "request_id": id}
+
+
+def get_answer_from_context(context):
+    template = """Context:
+    ```
+    {context}
+    ```
+    Using the above context, extract the company name and the URL as a list of JSON objects.
+    """
+    _prompt = SystemMessagePromptTemplate.from_template(template, input_variables = ["context"])
+    chat_prompt = ChatPromptTemplate.from_messages([_prompt])
+    chain = LLMChain(llm=llm_config.get_chat_model(), prompt=chat_prompt)
+    result = chain.run(context=context)
+    try:
+        return json.loads(result)
+    except json.decoder.JSONDecodeError as e:
+        return []
+
+
+def extract_http_links_from_pdf(pdf_path):
+    links = []
+    all_text = ''
+    try:
+        # Open the PDF file
+        pdf_document = fitz.open(pdf_path)
+
+        # Iterate through each page
+        for page_number in range(pdf_document.page_count):
+            # Get the page
+            page = pdf_document.load_page(page_number)
+
+            # Extract text from the page
+            page_text = page.get_text()
+            if len(all_text) + len(page_text) < 10000:
+                all_text += page_text
+            else:
+                links.extend(get_answer_from_context(all_text))
+                all_text = page_text
+        if len(all_text) > 0:
+            links.extend(get_answer_from_context(all_text))
+
+        # Close the PDF document
+        pdf_document.close()
+    except Exception as e:
+        print(f"Error: {e}")
+    return links
 
 
 # def test(company_name):
