@@ -147,6 +147,7 @@ def get_answer_from_context(context):
     ```
     Using the above context, extract the company name, description, industry, location, contact, 
     and the URL as a list of JSON objects.
+    The JSON object should have fields as company, description, industry, location, contact, and url.
     """
     _prompt = SystemMessagePromptTemplate.from_template(template, input_variables = ["context"])
     chat_prompt = ChatPromptTemplate.from_messages([_prompt])
