@@ -145,7 +145,8 @@ def get_answer_from_context(context):
     ```
     {context}
     ```
-    Using the above context, extract the company name and the URL as a list of JSON objects.
+    Using the above context, extract the company name, description, industry, location, contact, 
+    and the URL as a list of JSON objects.
     """
     _prompt = SystemMessagePromptTemplate.from_template(template, input_variables = ["context"])
     chat_prompt = ChatPromptTemplate.from_messages([_prompt])
@@ -154,6 +155,7 @@ def get_answer_from_context(context):
     try:
         return json.loads(result)
     except json.decoder.JSONDecodeError as e:
+        print(e)
         return []
 
 
